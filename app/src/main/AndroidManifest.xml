@@ -30,6 +30,11 @@
                     tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".CustomReceiver"
+            android:exported="false">
+
+        </receiver>
     </application>
 
 </manifest>
