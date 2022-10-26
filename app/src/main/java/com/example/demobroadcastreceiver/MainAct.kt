@@ -7,11 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainAct : AppCompatActivity(), ConnectReceiverListener, CustomReceiverListener {
+class MainAct : AppCompatActivity(), ConnectReceiverListener, CustomReceiverListener,
+    LocalReceiverListener {
+
     companion object{
         const val customActionBroadcast: String = "customActionBroadcast"
+        const val localBroadcast: String = "localBroadcast"
     }
 
 
@@ -24,6 +28,18 @@ class MainAct : AppCompatActivity(), ConnectReceiverListener, CustomReceiverList
         handleStaticBroadcastReceiver()
 
         handleCustomBroadcastReceiver()
+
+        handleLocalBroadcastReceiver()
+    }
+
+    private fun handleLocalBroadcastReceiver() {
+        tvLocalBroadcast.setOnClickListener(){
+            LocalReceiver.localReceiverListener = this
+
+            val intent = Intent()
+            intent.action = localBroadcast
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+        }
     }
 
     private fun handleCustomBroadcastReceiver() {
@@ -55,18 +71,26 @@ class MainAct : AppCompatActivity(), ConnectReceiverListener, CustomReceiverList
         }
     }
 
+    override fun onCustomChanged() {
+        Toast.makeText(this,"Custom BroadcastReceiver",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onLocalChanged() {
+        Toast.makeText(this,"Local BroadcastReceiver",Toast.LENGTH_SHORT).show()
+    }
+
     override fun onResume() {
         super.onResume()
         registerReceiver(CustomReceiver(), IntentFilter(customActionBroadcast))
+        LocalBroadcastManager.getInstance(this).registerReceiver(LocalReceiver(), IntentFilter(localBroadcast))
     }
 
     override fun onStop() {
         super.onStop()
         unregisterReceiver(ConnectReceiver())
         unregisterReceiver(CustomReceiver())
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(LocalReceiver())
     }
 
-    override fun onCustomChanged() {
-        Toast.makeText(this,"Custom BroadcastReceiver",Toast.LENGTH_SHORT).show()
-    }
+
 }

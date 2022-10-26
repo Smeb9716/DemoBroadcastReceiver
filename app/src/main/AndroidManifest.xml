@@ -33,7 +33,10 @@
 
         <receiver android:name=".CustomReceiver"
             android:exported="false">
+        </receiver>
 
+        <receiver android:name=".LocalReceiver"
+            android:exported="false">
         </receiver>
     </application>
 

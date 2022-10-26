@@ -31,6 +31,20 @@
         android:gravity="center"
         android:background="@android:color/holo_green_light"
         android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tvLocalBroadcast"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/local_broadcast"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@android:color/holo_red_light"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
         />
 
 </LinearLayout>
