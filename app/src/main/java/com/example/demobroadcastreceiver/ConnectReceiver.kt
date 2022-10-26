@@ -14,7 +14,9 @@ class ConnectReceiver : BroadcastReceiver() {
 
     // receive event when register broadcast
     override fun onReceive(context: Context, intent: Intent) {
-        connectReceiverListener.onNetworkConnectionChanged(isConnect(context))
+        if(intent.action.equals(ConnectivityManager.CONNECTIVITY_ACTION)){
+            connectReceiverListener.onNetworkConnectionChanged(isConnect(context))
+        }
     }
 
     //

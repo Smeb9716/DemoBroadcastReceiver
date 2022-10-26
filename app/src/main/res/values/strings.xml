@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">DemoBroadcastReceiver</string>
-    <string name="static_broadcast">Static Broadcast</string>
+    <string name="static_broadcast">Static Broadcast: Connected Internet</string>
 </resources>
